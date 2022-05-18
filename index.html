@@ -1,0 +1,84 @@
+<!DOCTYPE html>
+<html>
+<body>
+    <div id="root"></div>
+</body>
+<!-- react를 사용할 수 있도록 import를 먼저 하기 -->
+<script src="https://unpkg.com/react@17.0.2/umd/react.production.min.js"></script>
+<script src="https://unpkg.com/react-dom@17.0.2/umd/react-dom.production.min.js"></script>
+<script src="https://unpkg.com/@babel/standalone/babel.min.js"></script>
+<script type="text/babel">
+    const root = document.getElementById("root");
+
+    // html을 형성하는 어려운 방식    
+    /*
+    const h3 = React.createElement(
+        "h3",
+        //{id: "sexy-span", style:{color:'red'} },  // id나 class 등, 실제 속성(property)이 기재되는 명렁어 문구
+        {
+            id: "title",
+            onMouseEnter: () => console.log("mouse enter!"),
+        },
+        "Hello, I'm a span!"
+    );  // html의 span 태그를 사용한 것과 같은 ReactJS 명령어
+    */
+
+    /* const btn부터 해당 );까지의 코드를 가지고 button 기능을 만드는데
+    내부에는 첫번째 argument로서 btn에 들어갈 html태그를 넣었고,
+    맨 아래 세번째 content(= "Click me")를 넣었고,
+    중간 두번째 argument는 props(속성; property)가 포함된 object로서, eventListener등 이벤트까지 장착했다. */
+    /*
+    const btn = React.createElement(
+        "button",
+        {
+            onClick: () => console.log("i'm clicked"),
+            style: {
+                backgroundColor: "#00acc1",
+            },
+        },
+        "Click me!"
+    );
+    */
+
+    /*
+    const container = React.createElement(
+        "div",
+        null,
+        [h3, btn]
+    );
+    */
+
+
+    const Title = () => (
+        <h3 id="title" onMouseEnter={ () => console.log("mouse enter!") }>
+            Hello I'm a title
+        </h3>
+    );
+    const Button = () => (
+        <button style={ {backgroundColor: "tomato",} } onClick={ () => console.log("im clicked") }>
+            Click me
+        </button>
+    );
+
+    /*
+    const container = React.createElement(
+        "div",
+        null,
+        [Title, Button]
+    );
+    */
+    
+    //  <Title />과 <Button /> 태그의 경우 항상 대문자로 시작하기. 그렇지 않으면 html의 title과 button 기능의 태그로 이해하기 때문에 오류가 생긴다.
+    const Container = (
+        <div>
+            <Title />
+            <Button />
+        </div>
+    );
+
+    //ReactDOM.render(span, root)
+    //ReactDOM.render(btn, root)
+    //ReactDOM.render(container, root)
+    ReactDOM.render(Container, root)
+</script>
+</html>
