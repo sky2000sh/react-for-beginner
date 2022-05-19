@@ -48,7 +48,7 @@
     );
     */
 
-
+        /*
     const Title = () => (
         <h3 id="title" onMouseEnter={ () => console.log("mouse enter!") }>
             Hello I'm a title
@@ -59,6 +59,7 @@
             Click me
         </button>
     );
+    */
 
     /*
     const container = React.createElement(
@@ -68,11 +69,30 @@
     );
     */
     
-    //  <Title />과 <Button /> 태그의 경우 항상 대문자로 시작하기. 그렇지 않으면 html의 title과 button 기능의 태그로 이해하기 때문에 오류가 생긴다.
+    //  <Title />과 <Button /> 태그를 div태그에 넣는다. 이 경우 항상 대문자로 시작하기. 그렇지 않으면 html의 title과 button 기능의 태그로 이해하기 때문에 오류가 생긴다.
+    /*
     const Container = (
         <div>
             <Title />
             <Button />
+        </div>
+    );
+    */
+
+    let counter = 0;
+    function countUp() {
+        counter += 1;
+        render()        
+    }
+    function render() {
+        ReactDOM.render(<Container />, root);
+    }
+    const Container = () => (
+        <div>
+            <h3>Total clicks : {counter} </h3>
+
+            <button onClick={countUp}>Click me</button>
+            
         </div>
         // 테스트 주석
     );
@@ -80,6 +100,7 @@
     //ReactDOM.render(span, root)
     //ReactDOM.render(btn, root)
     //ReactDOM.render(container, root)
-    ReactDOM.render(Container, root)
+    //ReactDOM.render(<Container />, root);
+    render();
 </script>
 </html>
