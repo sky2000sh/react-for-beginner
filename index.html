@@ -92,6 +92,7 @@
     */
     /* <h3>Total clicks : {counter} </h3>
     <button onClick={countUp}>Click me</button> */
+    /*
     function App() {
         const [counter, setCounter] = React.useState(0);
         //let [counter, modifier] = React.useState(0);
@@ -114,6 +115,27 @@
             </div>
         );
     };
+    */
+
+    function App() {
+        const [minutes, setMinutes] = React.useState();
+        const onChange = () => {
+            //console.log("somebody wrote!")
+            //console.log(event)
+            //console.log(event.target.value)
+            setMinutes(event.target.value);
+        };
+        return (
+            <div>
+                <h1>Super Converter</h1>
+                <label for="minutes">Minutes</label>
+                <input value={minutes} id="minutes" placeholder="Minutes" type="number" onChange={onChange} />
+                <h4>You want to convert {minutes} </h4>
+                <label for="hours">Hours</label>
+                <input id="hours" placeholder="Hours" type="number" />        
+            </div>
+        );
+    }
 
     //ReactDOM.render(span, root)
     //ReactDOM.render(btn, root)
