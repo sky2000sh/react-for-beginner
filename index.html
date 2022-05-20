@@ -118,31 +118,41 @@
     */
 
     function App() {
-        const [minutes, setMinutes] = React.useState();
+        const [amount, setAmount] = React.useState();
+        const [flipped, setFlipped] = React.useState(false);
         const onChange = () => {
             //console.log("somebody wrote!")
             //console.log(event)
             //console.log(event.target.value)
-            setMinutes(event.target.value);
+            setAmount(event.target.value);
         };
-        const reset = () => {
-            setMinutes(0);
-        };
+        const reset = () => setAmount(0);
+        //const onFlip = () => setFlipped(!flipped);
+        // Flip 버튼을 누르면 onFlip() 함수가 실행되는데, onFlip() 함수는 현재 값을 받아서 그 반대의 값을 내놓는다는 명령어를 가지고 있다.
+        const onFlip = () => {
+            reset();
+            setFlipped( (current) => !current );            
+        }
         return (
             <div>
                 <h1>Super Converter</h1>
                 <div>
                     <label for="minutes">Minutes</label>
-                    <input value={minutes} id="minutes" placeholder="Minutes" type="number" onChange={onChange} />
+                    <input value={flipped ? amount * 60 : amount} id="minutes" placeholder="Minutes" type="number"
+                            onChange={onChange} disabled={flipped === true} />
                 </div>
                 <div>
                     <label for="hours">Hours</label>
-                    <input value={Math.round(minutes / 60)} id="hours" placeholder="Hours" type="number" />        
+                    <input value={flipped ? amount : Math.round(amount / 60) } id="hours" placeholder="Hours" type="number"
+                            onChange={onChange} disabled={flipped === false} />      
                 </div>
                 <button onClick={reset}>Reset</button>
+                <button onClick={onFlip}>Flip</button>
             </div>
         );
-    }
+    } 
+    // <input value={Math.round(minutes / 60)}
+    //  disabled={true} => input박스에 입력하지 못하도록 막아놓는 것 / read-only와 비슷한 개념
 
     //ReactDOM.render(span, root)
     //ReactDOM.render(btn, root)
