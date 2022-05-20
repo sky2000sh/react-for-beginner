@@ -103,7 +103,8 @@
         const onClick = () => {
             //counter += 1;
             //console.log('counter? : ', counter);
-            setCounter(counter + 1);
+            //setCounter(counter + 1);
+            setCounter( (current) => current + 1 );  // [(current) => current + 1] 이 뜻은 current라는 이륾을 가진 function () 함수를 적용해, current +1이란 명령어를 넣을 수 있다.
         }
         return (
             <div>
