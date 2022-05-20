@@ -119,7 +119,7 @@
 
     function App() {
         const [amount, setAmount] = React.useState();
-        const [flipped, setFlipped] = React.useState(false);
+        const [inverted, setInverted] = React.useState(false);
         const onChange = () => {
             //console.log("somebody wrote!")
             //console.log(event)
@@ -131,23 +131,23 @@
         // Flip 버튼을 누르면 onFlip() 함수가 실행되는데, onFlip() 함수는 현재 값을 받아서 그 반대의 값을 내놓는다는 명령어를 가지고 있다.
         const onFlip = () => {
             reset();
-            setFlipped( (current) => !current );            
+            setInverted( (current) => !current );            
         }
         return (
             <div>
                 <h1>Super Converter</h1>
                 <div>
                     <label for="minutes">Minutes</label>
-                    <input value={flipped ? amount * 60 : amount} id="minutes" placeholder="Minutes" type="number"
-                            onChange={onChange} disabled={flipped === true} />
+                    <input value={inverted ? amount * 60 : amount} id="minutes" placeholder="Minutes" type="number"
+                            onChange={onChange} disabled={inverted === true} />
                 </div>
                 <div>
                     <label for="hours">Hours</label>
-                    <input value={flipped ? amount : Math.round(amount / 60) } id="hours" placeholder="Hours" type="number"
-                            onChange={onChange} disabled={flipped === false} />      
+                    <input value={inverted ? amount : Math.round(amount / 60) } id="hours" placeholder="Hours" type="number"
+                            onChange={onChange} disabled={inverted === false} />      
                 </div>
                 <button onClick={reset}>Reset</button>
-                <button onClick={onFlip}>Flip</button>
+                <button onClick={onFlip}>{ inverted ? "Turn back" : "Invert" }</button>
             </div>
         );
     } 
