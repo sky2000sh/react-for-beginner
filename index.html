@@ -202,15 +202,16 @@
         }
         return (
             <div>
+                <h3>Minutes to Hours</h3>
                 <div>
-                    <label for="minutes">Minutes</label>
+                    <label for="minutes">Minutes :&nbsp;</label>
                     <input value={inverted ? amount * 60 : amount} id="minutes" placeholder="Minutes" type="number"
-                            onChange={onChange} disabled={inverted === true} />
+                            onChange={onChange} disabled={inverted === true} /> &nbsp; min
                 </div>
                 <div>
-                    <label for="hours">Hours</label>
+                    <label for="hours">Hours :&nbsp;</label>
                     <input value={inverted ? amount : Math.round(amount / 60) } id="hours" placeholder="Hours" type="number"
-                            onChange={onChange} disabled={inverted === false} />      
+                            onChange={onChange} disabled={inverted === false} /> &nbsp; h
                 </div>
                 <button onClick={reset}>Reset</button>
                 <button onClick={onFlip}>{ inverted ? "Turn back" : "Invert" }</button>
@@ -219,10 +220,34 @@
     } 
     
     function KmToMiles() {
-        return <h3>KM 2 M</h3>
+        const [amount, setAmount] = React.useState();
+        const [inverted, setInverted] = React.useState(false);
+        const onChange = () => {
+            setAmount(event.target.value);
+        };
+        const reset = () => setAmount(0);
+        const onFlip = () => {
+            reset();
+            setInverted( (current) => !currnet );
+        }
+        return (
+            <div>
+                <h3>Km to Miles</h3>
+                <div>  
+                    <label for="Kilometers">Kilometers :&nbsp;</label>
+                    <input value={inverted ? (amount / 0.621371).toFixed(3) : amount} id="kilometers" placeholder="Kilometers" type="number"
+                            onChange={onChange} disabled={inverted === true} /> &nbsp; km
+                </div>
+                <div>
+                    <label for="Miles">Miles :&nbsp;</label>
+                    <input value={inverted ? amount : (amount * 0.621371).toFixed(3)} id="miles" placeholder="Miles" type="number"
+                            onChange={onChange} disabled={inverted === false} /> &nbsp; mile
+                </div>
+                <button onClick={reset}>Reset</button>
+                <button onClick={onFlip}>{ inverted ? "Turn back" : "Invert" }</button>
+            </div>
+        );
     }
-
-
 
     //ReactDOM.render(span, root)
     //ReactDOM.render(btn, root)
