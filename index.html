@@ -255,36 +255,56 @@
 
 
     // for 22.05.22
-    function Btn( {text, big} ) {
-        // Btn()함수의 ()에는 argument(인자)를 넣을 수 있다. =>
+    function Btn( {text, changeValue} ) {
+        console.log(text, "was rendered")
+        // *** 중요 *** Btn()함수의 ()에는 argument(인자)를 넣을 수 있다. =>
         // 첫번째 경우로는 props라는 인자명을 주고 props.text를 취하거나,
         // 두번째 경우는 Btn({text})로써 JSX {}를 이용해 객체를 직접 넣는 방법이 있다.
         // console.log("props는? : ", props)
         return (
             <button
+                onClick={changeValue}
                 style={{
                     backgroundColor: "tomato",
                     color: "white",
                     padding: "10px 20px",
                     border : 0,
                     borderRadius: 10,
-                    fontSize: big ? 18 : 16,
                 }}>
                 {text}
             </button>
-        );        
-    }    
+        );
+    }
+    const MemorizedBtn = React.memo(Btn);
     function App() {
+        const [value, setValue] = React.useState("Save Changes");
+        const changeValue = () => setValue("Revert Changes");
         return (
             <div>
-                
-                <Btn text="Save Changes" big={true}/>
-                <Btn text="Continue" big={false}/>
+                <MemorizedBtn text={value} changeValue={changeValue}/>
+                <MemorizedBtn text="Continue" />
             </div>
-        );      
+        );
     }
     // Btn({text: "Save changes"})
-    // <Btn text="Save Changes" /> => text는 인자 키(key) / "Save Changes"는 인자 값(value)
+    // <Btn text="Save Changes" /> =>
+    // text는 인자 키(key) / "Save Changes"는 인자 값(value)
+    // App()함수에 리턴되는 <Btn>태그 내의 text={} 인자 키/값은 위에 있는 "Btn()"함수를 통해 작동이 되기 때문에
+    // Btn()함수에 인자를 주고 그 함수에 리턴받는 값이 있어야, <Btn>태그의 인자 키/값을 제대로 받을 수 있다.
+    // 그렇지 않으면 그저 연동되지 않는 인자키/값이 되버린다.
+
+    // 부모 함수(= App() )가 const [value, setValue]를 통해 어떤 state라도 변경이 있다면 모든 자식들 객체 및 함수(= 리턴값으로 받고있는 <Btn />태그들은 다시 그려진다. (re-rendering)
+    // Save Changes was rendered
+    // Continue was rendered
+    // Revert Changes was rendered
+    // Continue was rendered
+    // 이러한 현상이 상황에 따라서는 추후 개발 어플리케이션이 느려지는 원인이 될 수도 있다.
+    // 하지만 React.memo()를 사용하면 리턴값들 중 state가 변한 값들만 다시 그리게 해주고 그들 중 state가 변하지 않은 것은 그냥 그대로 계속 보여주는 것으로 사용할 수 있다.
+    // 이는 state가 변하는 것들만 state 업데이트가 되므로 성능속도에 도움이 되거나 실용적일 수 있다.
+    // React.memo()안에 적용하고자 하는 함수명을 넣으면 된다. React.memo(Btn);
+    // Save Changes was rendered
+    // Continue was rendered
+    // Revert Changes was rendered
 
     //ReactDOM.render(span, root)
     //ReactDOM.render(btn, root)
