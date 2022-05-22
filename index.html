@@ -8,7 +8,7 @@
 <script src="https://unpkg.com/react-dom@17.0.2/umd/react-dom.production.min.js"></script>
 <script src="https://unpkg.com/@babel/standalone/babel.min.js"></script>
 <script type="text/babel">
-    const root = document.getElementById("root");
+    // const root = document.getElementById("root");
 
     // html을 형성하는 어려운 방식    
     /*
@@ -157,6 +157,8 @@
     //  disabled={true} => input박스에 입력하지 못하도록 막아놓는 것 / read-only와 비슷한 개념
     */
 
+    // for 22.05.20 [km to mile]
+    /*
     function App() {
         const [index, setIndex] = React.useState("xx");
         const onSelect = (event) => {
@@ -176,14 +178,15 @@
                 {index === "1" ? <KmToMiles /> : null }
             </div>
         );
-        /* {index === "0" ? <MinutesToHours /> : null } =>
-        JSX에서 {}는 javascript를 사용할 수 있게 해준다.
-        일반적인 if()함수를 그냥 쓰게되면 텍스트로 인지하고 {}안에 if()함수를 즉,
-        { if()... }로 사용하면 js 함수로 인식하게 된다.
-        */
-    } 
+        // {index === "0" ? <MinutesToHours /> : null } =>
+        // JSX에서 {}는 javascript를 사용할 수 있게 해준다.
+        // 일반적인 if()함수를 그냥 쓰게되면 텍스트로 인지하고 {}안에 if()함수를 즉,
+        // { if()... }로 사용하면 js 함수로 인식하게 된다.        
+    }
+    */
     
     // 22.05.20 [km to mile]
+    /*
     function MinutesToHours() {
         const [amount, setAmount] = React.useState();
         const [inverted, setInverted] = React.useState(false);
@@ -248,11 +251,46 @@
             </div>
         );
     }
+    */
+
+
+    // for 22.05.22
+    function Btn( {text, big} ) {
+        // Btn()함수의 ()에는 argument(인자)를 넣을 수 있다. =>
+        // 첫번째 경우로는 props라는 인자명을 주고 props.text를 취하거나,
+        // 두번째 경우는 Btn({text})로써 JSX {}를 이용해 객체를 직접 넣는 방법이 있다.
+        // console.log("props는? : ", props)
+        return (
+            <button
+                style={{
+                    backgroundColor: "tomato",
+                    color: "white",
+                    padding: "10px 20px",
+                    border : 0,
+                    borderRadius: 10,
+                    fontSize: big ? 18 : 16,
+                }}>
+                {text}
+            </button>
+        );        
+    }    
+    function App() {
+        return (
+            <div>
+                
+                <Btn text="Save Changes" big={true}/>
+                <Btn text="Continue" big={false}/>
+            </div>
+        );      
+    }
+    // Btn({text: "Save changes"})
+    // <Btn text="Save Changes" /> => text는 인자 키(key) / "Save Changes"는 인자 값(value)
 
     //ReactDOM.render(span, root)
     //ReactDOM.render(btn, root)
     //ReactDOM.render(container, root)
     //ReactDOM.render(<Container />, root);
+    const root = document.getElementById("root");
     ReactDOM.render(<App />, root);
 </script>
 </html>
